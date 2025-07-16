@@ -1,0 +1,81 @@
+name: qt
+version: 6.9.1
+summary: Qt
+description: Qt
+
+base: core24
+grade: stable
+confinement: strict
+compression: lzo
+
+apps:
+  gallery:
+    command: usr/examples/widgets/gallery/bin/gallery
+    extensions: [gnome]
+
+parts:
+  qt:
+    source: https://github.com/qt/qt5.git
+    source-depth: 1
+    source-tag: v6.9.1
+    source-submodules:
+      - qtbase
+      - qtsvg
+      - qtwayland
+    plugin: cmake
+    build-environment:
+      - LDFLAGS: ${LDFLAGS:+$LDFLAGS} -s
+    build-packages:
+      - libssl-dev
+      - libxcb-cursor-dev
+      - libxcb-glx0-dev
+      - libxcb-icccm4-dev
+      - libxcb-image0-dev
+      - libxcb-keysyms1-dev
+      - libxcb-randr0-dev
+      - libxcb-render-util0-dev
+      - libxcb-shape0-dev
+      - libxcb-sync-dev
+      - libxcb-util-dev
+      - libxcb-xfixes0-dev
+      - libxcb-xkb-dev
+      - libxkbcommon-x11-dev
+    stage-packages:
+      - libssl3t64
+      - libxcb-cursor0
+      - libxcb-glx0
+      - libxcb-icccm4
+      - libxcb-image0
+      - libxcb-keysyms1
+      - libxcb-randr0
+      - libxcb-render-util0
+      - libxcb-shape0
+      - libxcb-sync1
+      - libxcb-util1
+      - libxcb-xfixes0
+      - libxcb-xkb1
+      - libxkbcommon-x11-0
+    cmake-generator: Ninja
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DINSTALL_LIBDIR=/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR
+      - -DQT_BUILD_EXAMPLES=ON
+      - -DINPUT_libjpeg=qt
+      - -DINPUT_openssl=linked
+    prime:
+      - -./usr/bin
+      - -./usr/doc
+      - -./usr/include
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/cmake
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pkgconfig
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/*.a
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/*.la
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/*.prl
+      - -./usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/*.so
+      - -./usr/libexec
+      - -./usr/metatypes
+      - -./usr/mkspecs
+      - -./usr/modules
+      - -./usr/sbom
+      - -./**/objects-*
