@@ -1,7 +1,7 @@
-name: qt
+name: test_qt
 version: 6.9.1
-summary: Qt
-description: Qt
+summary: Qt test snap application
+description: Qt test snap application
 
 base: core24
 grade: stable
