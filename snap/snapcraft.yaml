@@ -1,4 +1,4 @@
-name: test_qt
+name: test-qt
 version: 6.9.1
 summary: Qt test snap application
 description: Qt test snap application
